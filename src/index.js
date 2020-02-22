@@ -2,7 +2,6 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const produto = require('./models/produto')
 
 //conectando banco de dados
 require('./database/data');
@@ -19,8 +18,10 @@ app.use(bodyParser.urlencoded({
 //carregar rotas
 const indexRoutes = require('./routes/routes-index');
 const produtosRoutes = require('./routes/routes-produtos');
+const lotesRoutes = require('./routes/routes-lotes');
 
 app.use('/', indexRoutes);
 app.use('/produtos', produtosRoutes);
+app.use('/lotes', lotesRoutes)
 
 module.exports = app;

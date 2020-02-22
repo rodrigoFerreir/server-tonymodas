@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/produtos-controllers');
+const controller = require('../controllers/lotes-controllers');
 
 router.post('/', controller.post);
 router.get('/', controller.get);
