@@ -19,9 +19,11 @@ app.use(bodyParser.urlencoded({
 const indexRoutes = require('./routes/routes-index');
 const produtosRoutes = require('./routes/routes-produtos');
 const lotesRoutes = require('./routes/routes-lotes');
+const categoriasRoutes = require('./routes/routes-categorias');
 
 app.use('/', indexRoutes);
 app.use('/produtos', produtosRoutes);
 app.use('/lotes', lotesRoutes)
+app.use('/categorias', categoriasRoutes)
 
 module.exports = app;

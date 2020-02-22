@@ -1,14 +1,17 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Lotes extends Model{
+class Lote extends Model{
   static init(connection){
     super.init({
       referencia: DataTypes.INTEGER,
     }, {
       sequelize: connection,
+      modelName: 'Lote'
     })
   }
 
 }
 
-module.exports = Lotes;
+module.exports = Lote;
+
+//Criando Model de Lote.
