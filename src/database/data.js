@@ -22,7 +22,8 @@ Categoria.init(connection);
 Produto.init(connection);
 
 //Iniciando Relacionamentos
-Produto.associate(connection.models)
-Categoria.associate(connection.models)
+Produto.associate(connection.models);
+Categoria.associate(connection.models);
+Lote.associate(connection.models);
 
 module.exports = connection;

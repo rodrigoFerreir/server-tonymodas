@@ -6,13 +6,13 @@ class Categoria extends Model{
       nome: DataTypes.STRING,
     }, {
       sequelize: connection,
-      modelName: 'Categoria'
-    })
-  }
+      modelName: 'categorias'
+    });
+  };
 
   static associate(models){
-    this.hasMany(models.Produto, {foreignKey: 'id_categoria', as:"categoria"});
-  }
+    this.hasMany(models.Produto, {foreignKey: 'id_categoria', as:'categoria'});
+  };//categoria tem muitos produtos.
 }
 
 

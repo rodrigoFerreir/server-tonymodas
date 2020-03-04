@@ -8,7 +8,11 @@ class Lote extends Model{
       sequelize: connection,
       modelName: 'Lote'
     })
-  }
+  };
+
+  static associate(models){
+    this.belongsToMany(models.Lote, {foreignKey: 'id_lote', through:'lotes_produtos', as: 'lotes'});
+  }; //lotes possui muitos produtos
 
 }
 

@@ -12,7 +12,7 @@ module.exports = {
                 });
             }).catch((err) => {
                 res.status(400).send({
-                    message: 'Categoria não cadastrado.',
+                    message: 'Categoria não cadastrada.',
                     data: err
                 });
             });
@@ -24,6 +24,7 @@ module.exports = {
         .then((data)=>{
             res.status(200).send(data);
         }).catch((err)=>{
+            console.log(err)
             res.status(400).send(err);
         })
     },

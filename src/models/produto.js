@@ -12,12 +12,12 @@ class Produto extends Model{
       sequelize: connection,
       modelName:'Produto'
     })
-  }
-  
+  };
+
   static associate(models){
-    this.belongsTo(models.Produto, {foreignKey: 'id_lote', as: 'lote'});
     this.belongsTo(models.Produto, {foreignKey: 'id_categoria', as: "categoria"});
-  }
+    this.belongsToMany(models.Produto, {foreignKey: 'id_produto', through:'lotes_produtos', as: 'lote'});
+  }; //produtos pertence a uma categoria e a muitos lotes
 
 };
 

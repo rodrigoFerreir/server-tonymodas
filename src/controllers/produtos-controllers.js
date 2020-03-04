@@ -46,17 +46,43 @@ module.exports = {
     },
 
     async put(req, res, next) {
-        const id = req.params.id;
-        res.status(201).send({
-            id,
-            itens: req.body
-        });
-    },
+        const { id } = req.params;
+        const { nome, marca, valor_compra, valor_venda, quantidade } = req.body;
+        const produto = await Produto.findByPk(id)
+        if(!produto){
+            res.status(400).send('Produto não encontrado.')
+        }
+        await Produto.update({
+            nome,
+            marca,
+            valor_compra,
+            valor_venda,
+            quantidade,
+        },{
+            where:{
+                id,
+            }
+        }).then(()=>{
+            res.status(200).send('Produto alterado!').send(req.body);
+        }).catch((err)=>{
+            res.status(400).send('Não foi possivel atualizar produto.')
+        });       
+    },//erro ao atualizar.
+
     async delete(req, res, next) {
-        const id = req.params.id;
-        res.status(200).send(req.body);
+        const { id } = req.params;
+        const produto = await Produto.findByPk(id)
+        if(!produto){
+            res.status(400).send('Produto não encontrado.')
+        }
+        await Produto.destroy({
+            where:{
+                id,
+            }
+        }).then(()=>{
+            res.status(200).send('Produto excluido!');
+        }).catch((err)=>{
+            res.status(400).send('Não foi possivel deletar produto.')
+        });       
     }
 };
-
-// 
-// };
