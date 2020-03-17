@@ -6,16 +6,16 @@ const Produto = require('../models/Produto');
 
 module.exports = {
     async post(req, res, next) {
-        const { id_lote, id_categoria } = req.query;
+        const { id_lote, id_categoria } = req.body;
         const { nome, marca, valor_compra, valor_venda, quantidade } = req.body;
 
         const lote = Lote.findByPk(id_lote);
         const categoria = Categoria.findByPk(id_categoria);
 
-        if(!lote && !categoria){
+        if(!lote || !categoria){
             res.status(400).send({message : 'Lote ou Categoria nao encotrado'})
         }
-        await Produto.create({
+      const produto = await Produto.create({
             nome,
             marca,
             valor_compra,
@@ -34,6 +34,7 @@ module.exports = {
                 data: err
             });
         });
+        res.send(produto)
     },
 
     async get(req, res, next) {

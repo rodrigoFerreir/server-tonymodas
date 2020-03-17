@@ -16,7 +16,7 @@ class Produto extends Model{
 
   static associate(models){
     this.belongsTo(models.Produto, {foreignKey: 'id_categoria', as: "categoria"});
-    this.belongsToMany(models.Produto, {foreignKey: 'id_produto', through:'lotes_produtos', as: 'lote'});
+    this.belongsToMany(models.Lote, {foreignKey: 'id_lote', through:'produto_lote', as: 'lote'});
   }; //produtos pertence a uma categoria e a muitos lotes
 
 };

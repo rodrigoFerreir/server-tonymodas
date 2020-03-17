@@ -1,31 +1,39 @@
 'use strict';
-const Produto = require('../models/Produto')
-const Lote = require('../models/Lote');
+
+const Cliente = require('../models/Cliente');
 
 module.exports = {
     async post(req, res, next) {
-        const { referencia } = req.body;
-
-        const lote = await Lote.create({
+        console.log(req.body)
+        const {
+            nome,
+            cpf,
             referencia
-        }).then(() => {
+        } = req.body;
+        const cliente = await Cliente.create({
+                nome,
+                cpf,
+                referencia
+            })
+            .then(() => {
                 res.status(201).send({
-                    message: 'Lote cadastrado com sucesso.'
+                    message: 'Cliente cadastrado com sucesso.'
                 });
             }).catch((err) => {
                 res.status(400).send({
-                    message: 'Lote não cadastrado.',
+                    message: 'Cliente não cadastrado.',
                     data: err
                 });
             });
-        return res.json(lote);
+        return res.json(cliente);
     },
 
     async get(req, res, next) {
-        Lote.findAll()
+        Cliente.findAll()
             .then((data) => {
                 res.status(200).send(data);
             }).catch((err) => {
+                console.log(err)
                 res.status(400).send(err);
             })
     },
