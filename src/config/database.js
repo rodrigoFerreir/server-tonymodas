@@ -1,8 +1,9 @@
 module.exports = {
   dialect:'postgres',
   host:'localhost',
+  port: '5432',
   username:'postgres',
-  password:'admin',
+  password:'postgres',
   database:'tonymodas_estoque',
   define: {
     timestamps: true,
