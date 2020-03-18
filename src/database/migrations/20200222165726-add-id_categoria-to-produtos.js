@@ -10,6 +10,7 @@ module.exports = {
           references:{ model:'categorias', key:'id' },
           onUpdate:'cascade',
           onDelete:'restrict',
+          allowNull: false,
       });
   },
 

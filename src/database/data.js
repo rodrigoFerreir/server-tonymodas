@@ -4,6 +4,10 @@ const dbConfig = require('../config/database');
 const Lote = require('../models/Lote');
 const Categoria = require('../models/Categoria');
 const Produto = require('../models/Produto');
+const Cidade = require('../models/Cidade')
+const Cliente= require('../models/Cliente')
+const Contato = require('../models/Contato')
+const Endereco = require('../models/Endereco')
 
 //Inicando conexão com o banco de dados.
 const connection = new Sequelize(dbConfig);
@@ -20,10 +24,19 @@ connection.authenticate().then(() => {
 Lote.init(connection);
 Categoria.init(connection);
 Produto.init(connection);
+Cidade.init(connection);
+Cliente.init(connection);
+Contato.init(connection);
+Endereco.init(connection);
+
 
 //Iniciando Relacionamentos
 Produto.associate(connection.models);
 Categoria.associate(connection.models);
 Lote.associate(connection.models);
+Cliente.associate(connection.models);
+Cidade.associate(connection.models);
+Endereco.associate(connection.models);
+Contato.associate(connection.models);
 
 module.exports = connection;

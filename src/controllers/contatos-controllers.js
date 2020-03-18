@@ -1,28 +1,44 @@
 'use strict';
-const Produto = require('../models/Produto')
-const Lote = require('../models/Lote');
+const Contato = require('../models/Contato')
+const Cliente = require('../models/Cliente');
 
 module.exports = {
     async post(req, res, next) {
-        const { referencia } = req.body;
+        const { id_cliente } = req.body;
+        const {
+            telefone,
+            email
+        } = req.body;
 
-        const lote = await Lote.create({
-            referencia
-        }).then(() => {
+        const cliente = await Cliente.findByPk(id_cliente);
+
+
+        if (!cliente) {
+            res.status(400).send({
+                message: 'Cliente não encotrado'
+            })
+        }
+
+       const contato = await Contato.create({
+                telefone,
+                email,
+                id_cliente,
+            })
+            .then(() => {
                 res.status(201).send({
-                    message: 'Lote cadastrado com sucesso.'
+                    message: 'Contato cadastrado com sucesso.'
                 });
             }).catch((err) => {
                 res.status(400).send({
-                    message: 'Lote não cadastrado.',
+                    message: 'Contato não cadastrado.',
                     data: err
                 });
             });
-        return res.json(lote);
+        return res.json(contato);
     },
 
     async get(req, res, next) {
-        Lote.findAll()
+        Contato.findAll()
             .then((data) => {
                 res.status(200).send(data);
             }).catch((err) => {
