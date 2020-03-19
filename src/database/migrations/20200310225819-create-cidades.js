@@ -18,7 +18,11 @@ module.exports = {
         allowNull: false,
       },
       nome:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      cep:{
+        type: Sequelize.TEXT,
         allowNull: false,
       },
     });

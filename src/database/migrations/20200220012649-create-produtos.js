@@ -37,7 +37,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: '1',
-      } 
+      },
+      id_lote:{
+        type: Sequelize.INTEGER,
+        references:{ model:'lotes', key:'id' },
+        onUpdate:'cascade',
+        onDelete:'restrict',
+        allowNull: false,
+      },
     });
   },
 
