@@ -24,14 +24,6 @@ module.exports = {
       marca: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      valor_compra: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
-      },
-      valor_venda: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
       },   
       quantidade:{
         type: Sequelize.INTEGER,

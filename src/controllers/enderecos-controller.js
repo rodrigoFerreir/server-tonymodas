@@ -65,7 +65,22 @@ module.exports = {
     },
 
     async delete(req, res, next) {
-        const id = req.params.id;
-        res.status(200).send(req.body);
+        const {
+            id
+        } = req.body;
+        const cidade = Cidade.findByPk(id)
+        if (cidade) {
+            Cidade.destroy({
+                where: {
+                    id
+                }
+            });
+            res.status(200).json({
+                message: 'Cidade excluida!'
+            })
+        }
+        res.status(200).json({
+            message: 'Cidade não foi excluida'
+        });
     }
 };

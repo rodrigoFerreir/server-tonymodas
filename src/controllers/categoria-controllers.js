@@ -37,8 +37,23 @@ module.exports = {
         });
     },
 
-    async delete(req, res, next){
-        const id = req.params.id;
-        res.status(200).send(req.body);
+    async delete(req, res, next) {
+        const {
+            id
+        } = req.body;
+        const categoria = Categoria.findByPk(id)
+        if (categoria) {
+            Categoria.destroy({
+                where: {
+                    id
+                }
+            });
+            res.status(200).json({
+                message: 'Categoria excluida!'
+            })
+        }
+        res.status(200).json({
+            message: 'Categoria não foi excluida'
+        });
     }
 };

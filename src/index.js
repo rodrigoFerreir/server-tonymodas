@@ -3,14 +3,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 
 //conectando banco de dados
-//require('./database/data');
-mongoose.connect("mongodb+srv://tony:latony@cluster0-hlanl.mongodb.net/test?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+require('./database/data');
+// mongoose.connect("mongodb+srv://tony:latony@cluster0-hlanl.mongodb.net/test?retryWrites=true&w=majority", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// });
 
 const app = express();
 

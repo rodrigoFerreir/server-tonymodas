@@ -6,8 +6,8 @@ const controller = require('../controllers/clientes-controllers');
 
 router.post('/', controller.post);
 router.get('/', controller.get);
-// router.put('/:id', controller.put);
-// router.delete('/:id', controller.delete);
+router.put('/', controller.put);
+router.delete('/', controller.delete);
 
 
 module.exports = router;

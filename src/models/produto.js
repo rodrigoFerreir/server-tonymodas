@@ -5,8 +5,6 @@ class Produto extends Model{
     super.init({
       nome: DataTypes.STRING,
       marca: DataTypes.STRING,
-      valor_compra: DataTypes.DOUBLE,
-      valor_venda: DataTypes.DOUBLE,
       quantidade : DataTypes.INTEGER,
     }, {
       sequelize: connection,
@@ -17,6 +15,7 @@ class Produto extends Model{
   static associate(models){
     this.belongsTo(models.Produto, {foreignKey: 'id_categoria', as: "categoria"});
     this.belongsToMany(models.Lote, {foreignKey: 'id_lote', through:'produto_lote', as: 'lote'});
+    this.belongsToMany(models.Precos, {foreignKey: 'id_preco', through:'precos', as:'preco'});
   }; //produtos pertence a uma categoria e a muitos lotes
 
 };

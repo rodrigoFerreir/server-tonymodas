@@ -4,6 +4,7 @@ const dbConfig = require('../config/database');
 const Lote = require('../models/Lote');
 const Categoria = require('../models/Categoria');
 const Produto = require('../models/Produto');
+const Precos = require('../models/Precos');
 const Cidade = require('../models/Cidade')
 const Cliente= require('../models/Cliente')
 const Contato = require('../models/Contato')
@@ -24,6 +25,7 @@ connection.authenticate().then(() => {
 Lote.init(connection);
 Categoria.init(connection);
 Produto.init(connection);
+Precos.init(connection);
 Cidade.init(connection);
 Cliente.init(connection);
 Contato.init(connection);
@@ -32,6 +34,7 @@ Endereco.init(connection);
 
 //Iniciando Relacionamentos
 Produto.associate(connection.models);
+Precos.associate(connection.models);
 Categoria.associate(connection.models);
 Lote.associate(connection.models);
 Cliente.associate(connection.models);
