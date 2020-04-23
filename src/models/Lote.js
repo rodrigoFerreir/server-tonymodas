@@ -12,6 +12,7 @@ class Lote extends Model{
 
   static associate(models){
     this.hasMany(models.Produto, {foreignKey: 'id_lote', as: 'lotes'});
+    this.hasMany(models.Preco, {foreignKey: 'id_lote', as: 'precos'});
   }; //lotes possui muitos produtos
 
 }

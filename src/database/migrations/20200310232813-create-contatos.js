@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('contatos', { 
+    return queryInterface.createTable('contatos', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -17,25 +17,28 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      telefone:{
+      telefone: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      email:{
+      email: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      id_cliente:{
+      id_cliente: {
         type: Sequelize.INTEGER,
-        references:{ model:'clientes', key:'id' },
-        onUpdate:'cascade',
-        onDelete:'cascade',
+        references: {
+          model: 'clientes',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
         allowNull: false,
       },
     });
-},
+  },
 
-down: (queryInterface, Sequelize) => {
+  down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('contatos');
-}
+  }
 };

@@ -25,6 +25,13 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
+      id_lote:{
+        type: Sequelize.INTEGER,
+        references:{ model:'lotes', key:'id' },
+        onUpdate:'cascade',
+        onDelete:'restrict',
+        allowNull: false,
+      },
     });
 },
 

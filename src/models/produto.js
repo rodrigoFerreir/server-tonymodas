@@ -4,24 +4,19 @@ class Produto extends Model{
   static init(connection){
     super.init({
       nome: DataTypes.STRING,
-      marca: DataTypes.STRING,
-      quantidade : DataTypes.INTEGER,
+      marca:DataTypes.STRING,
+      tamanho:DataTypes.STRING,
+      observacao:DataTypes.TEXT,
+      quantidade:DataTypes.INTEGER,
     }, {
       sequelize: connection,
-      modelName:'Produto'
+      modelName: 'Produto',
     })
   };
-
   static associate(models){
-    this.belongsTo(models.Produto, {foreignKey: 'id_categoria', as: "categoria"});
-    this.belongsToMany(models.Lote, {foreignKey: 'id_lote', through:'produto_lote', as: 'lote'});
-    this.belongsToMany(models.Precos, {foreignKey: 'id_preco', through:'precos', as:'preco'});
-  }; //produtos pertence a uma categoria e a muitos lotes
-
+    this.belongsTo(models.categorias, {foreignKey:'id_categoria', as:'categorias'})
+    this.belongsTo(models.Lote, {foreignKey:'id_lote', as:'lotes'});
+    this.belongsToMany(models.Preco, {foreignKey:'id_produto', through:'preco_produtos', as:'precos'});
+  };
 };
-
-
-
 module.exports = Produto;
-
-//criando o modulo de produtos;

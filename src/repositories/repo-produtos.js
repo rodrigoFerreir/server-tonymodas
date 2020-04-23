@@ -1,9 +1,16 @@
 const Produto = require('../models/Produto');
 
-exports.get = () =>{
-   return Produto.findAll
+exports.getProdutos = async () =>{
+    return await Produto.findAll();
 }
 
 exports.getProdutoById = (id) =>{
-    return Produto.findByPk(id)
-}
+    return Produto.findByPk(id, {
+        attributes:['nome', 'marca', 'tamanho', 'observacao', 'quantidade'],
+        include:[
+            {association: 'categorias', attributes:['nome']},
+            {association:'lotes', attributes:['referencia']}, 
+            {association:'precos', attributes:['valor_compra', 'valor_venda']}
+        ]
+    })
+};

@@ -24,6 +24,14 @@ module.exports = {
       marca: {
         type: Sequelize.STRING,
         allowNull: false,
+      },  
+      tamanho: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },  
+      observacao: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },   
       quantidade:{
         type: Sequelize.INTEGER,

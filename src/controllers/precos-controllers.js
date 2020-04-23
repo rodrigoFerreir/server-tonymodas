@@ -1,0 +1,72 @@
+'use strict';
+const Preco = require('../models/Preco');
+const Produto = require('../models/Produto')
+
+module.exports = {
+    async post(req, res, next) {
+        const {
+            valor_compra,
+            valor_venda,
+            id_lote,
+            id_produto
+        } = req.body;
+
+        const produto = await Produto.findByPk(id_produto);
+
+        if (!produto) {
+            res.status(400).json({
+                message: 'Produto nao encontrado'
+            })
+            return;
+        }
+        const preco = await Preco.findOrCreate({
+            where: {
+                valor_compra,
+                valor_venda,
+                id_lote,
+            }
+        }).then((data) => {
+            if (data[1] === true) {
+                res.status(200).json({
+                    message: 'Novo Preco criado'
+                })
+            } else {
+                res.status(200).json({
+                    message: 'Preco encontrado',
+                    dados: data[0]
+                })
+            }
+            produto.addPreco(data[0])
+        }).catch((err) => {
+            res.status(400).json({
+                message: 'Preco não encontrado nem cadastrado, verifique os dados enviados!'
+            })
+        })
+        console.log(preco)
+
+        return res.json(preco);
+    },
+
+    async get(req, res, next) {
+        Lote.findAll()
+            .then((data) => {
+                res.status(200).send(data);
+            }).catch((err) => {
+                console.log(err)
+                res.status(400).send(err);
+            })
+    },
+
+    async put(req, res, next) {
+        const id = req.params.id;
+        res.status(201).send({
+            id,
+            itens: req.body
+        });
+    },
+
+    async delete(req, res, next) {
+        const id = req.params.id;
+        res.status(200).send(req.body);
+    }
+};
