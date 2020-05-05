@@ -43,13 +43,11 @@ module.exports = {
                 message: 'Preco não encontrado nem cadastrado, verifique os dados enviados!'
             })
         })
-        console.log(preco)
-
         return res.json(preco);
     },
 
     async get(req, res, next) {
-        Preco.findAll()
+        RepositorioPreco.get()
             .then((data) => {
                 res.status(200).send(data);
             }).catch((err) => {
@@ -59,7 +57,9 @@ module.exports = {
     },
 
     async getById(req, res, next) {
-        const { id_preco } = req.body
+        const {
+            id_preco
+        } = req.body
         RepositorioPreco.getPrecoById(id_preco)
             .then((data) => {
                 res.status(200).send(data);
@@ -67,18 +67,5 @@ module.exports = {
                 console.log(err)
                 res.status(400).send(err);
             })
-    },
-
-    async put(req, res, next) {
-        const id = req.params.id;
-        res.status(201).send({
-            id,
-            itens: req.body
-        });
-    },
-
-    async delete(req, res, next) {
-        const id = req.params.id;
-        res.status(200).send(req.body);
     }
 };
