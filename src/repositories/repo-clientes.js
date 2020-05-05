@@ -23,3 +23,7 @@ exports.getClienteByCPF = (cpf) =>{
         ]
     })
 };
+
+exports.updateCliente = (nome, referencia, cpf) =>{
+    return Cliente.update({nome, referencia},{ where:{cpf} })
+}

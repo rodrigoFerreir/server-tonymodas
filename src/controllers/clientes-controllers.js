@@ -101,23 +101,15 @@ module.exports = {
             referencia
         } = req.body;
 
-        const cliente = RepositorioCliente.getClienteByCPF(cpf)
+        let cliente = RepositorioCliente.getClienteByCPF(cpf)
         if (cliente) {
-            Cliente.update({
-                nome,
-                referencia
-            }, {
-                where: {
-                    nome,
-                    referencia,
-                }
+            cliente = RepositorioCliente.updateCliente(nome, referencia, cpf).then(() => {
+                res.status(200).json({
+                    message: 'Cliente atualizado com sucesso!'
+                })
             })
-            res.status(201).json({
-                cpf,
-                message: 'Cliente atualizado com sucesso!'
-            });
         } else {
-            res.status(201).json({
+            res.status(400).json({
                 cpf,
                 message: 'Cliente não foi atualizado!'
             });
@@ -125,7 +117,7 @@ module.exports = {
     },
 
     async delete(req, res, next) {
-        const {
+        let {
             cpf
         } = req.body;
         const cliente = RepositorioCliente.getClienteByCPF(cpf)
