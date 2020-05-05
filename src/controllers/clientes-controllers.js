@@ -1,6 +1,7 @@
 'use strict';
 
 const Cliente = require('../models/Cliente');
+const RepositorioCliente = require('../repositories/repo-clientes')
 const ValidationContract = require('../validations/validators');
 
 module.exports = {
@@ -15,7 +16,6 @@ module.exports = {
             res.status(400).send(contract.errors()).end();
             return;
         }
-        
         const {
             nome,
             cpf,
@@ -39,7 +39,7 @@ module.exports = {
         return res.json(cliente);
     },
 
-    async get(req, res, next) {
+    async getAll(req, res, next) {
         Cliente.findAll()
             .then((data) => {
                 if (data) {
@@ -56,34 +56,69 @@ module.exports = {
             })
     },
 
+    async getById(req, res, next) {
+        const {
+            id_cliente
+        } = req.body
+        RepositorioCliente.getClienteById(id_cliente)
+            .then((data) => {
+                if (data) {
+                    res.status(200).json(data);
+                } else {
+                    res.status(200).json({
+                        message: 'Nenhum dado encontrado!'
+                    })
+                }
+            }).catch((err) => {
+                console.log(err)
+                res.status(400).send(err);
+            })
+    },
+
+    async getByCPF(req, res, next) {
+        const {
+            cpf
+        } = req.body
+        RepositorioCliente.getClienteByCPF(cpf)
+            .then((data) => {
+                if (data) {
+                    res.status(200).json(data);
+                } else {
+                    res.status(200).json({
+                        message: 'Nenhum dado encontrado!'
+                    })
+                }
+            }).catch((err) => {
+                console.log(err)
+                res.status(400).send(err);
+            })
+    },
+
     async put(req, res, next) { //não está atualizando;
         const {
-            id,
             nome,
             cpf,
             referencia
         } = req.body;
 
-        const cliente = Cliente.findByPk(id)
+        const cliente = RepositorioCliente.getClienteByCPF(cpf)
         if (cliente) {
             Cliente.update({
                 nome,
-                cpf,
                 referencia
             }, {
                 where: {
                     nome,
-                    cpf,
                     referencia,
                 }
             })
             res.status(201).json({
-                id,
+                cpf,
                 message: 'Cliente atualizado com sucesso!'
             });
         } else {
             res.status(201).json({
-                id,
+                cpf,
                 message: 'Cliente não foi atualizado!'
             });
         }
@@ -91,13 +126,13 @@ module.exports = {
 
     async delete(req, res, next) {
         const {
-            id
+            cpf
         } = req.body;
-        const cliente = Cliente.findByPk(id)
+        const cliente = RepositorioCliente.getClienteByCPF(cpf)
         if (cliente) {
             Cliente.destroy({
                 where: {
-                    id
+                    cpf
                 }
             });
             res.status(200).json({

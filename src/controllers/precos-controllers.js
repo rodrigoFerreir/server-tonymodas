@@ -1,6 +1,7 @@
 'use strict';
 const Preco = require('../models/Preco');
-const Produto = require('../models/Produto')
+const Produto = require('../models/Produto');
+const RepositorioPreco = require('../repositories/repo-precos')
 
 module.exports = {
     async post(req, res, next) {
@@ -48,7 +49,18 @@ module.exports = {
     },
 
     async get(req, res, next) {
-        Lote.findAll()
+        Preco.findAll()
+            .then((data) => {
+                res.status(200).send(data);
+            }).catch((err) => {
+                console.log(err)
+                res.status(400).send(err);
+            })
+    },
+
+    async getById(req, res, next) {
+        const { id_preco } = req.body
+        RepositorioPreco.getPrecoById(id_preco)
             .then((data) => {
                 res.status(200).send(data);
             }).catch((err) => {

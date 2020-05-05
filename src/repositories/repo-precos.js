@@ -6,17 +6,15 @@ exports.get = () =>{
  }
  
 exports.getPrecoById = (id) =>{
-     return Preco.findByPk(id)
+     return Preco.findByPk(id, {
+        attributes:['valor_compra', 'valor_venda'],
+        include:[
+            {association: 'lotes', attributes:['referencia', 'createdAt']},
+            {association:'produtos', attributes:['nome', 'marca', 'quantidade']},
+        ]
+     })
 }
 
-exports.getPrecoAndCreate = (valor_compra, valor_venda) =>{
-    return Preco.findOrCreate({ where:{ valor_compra, valor_venda }});
-}
-
-exports.getIdPrecoToValues = (valor_compra, valor_venda) =>{
-    const precos = Preco.findAll({where:{valor_compra, valor_venda}})
-    console.log(precos.id)
-}
 
 exports.create = (data) =>{
     const preco = new Preco(data)

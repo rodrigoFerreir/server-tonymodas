@@ -6,6 +6,7 @@ const controller = require('../controllers/precos-controllers');
 
 router.post('/', controller.post);
 router.get('/', controller.get);
+router.get('/preco', controller.getById);
 //router.put('/:id', controller.put);
 //router.delete('/:id', controller.delete);
 
