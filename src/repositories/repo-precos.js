@@ -30,6 +30,22 @@ exports.getPrecoById = (id) => {
     })
 }
 
+exports.getPrecoByValor_venda = (valor_venda) => {
+    return Preco.findAll({where:{
+        valor_venda
+    }},{
+        attributes: ['valor_compra', 'valor_venda'],
+        include: [{
+                association: 'lotes',
+                attributes: ['referencia', 'createdAt']
+            },
+            {
+                association: 'produtos',
+                attributes: ['nome', 'marca', 'quantidade']
+            },
+        ]
+    })
+}
 
 exports.create = (data) => {
     const preco = new Preco(data)

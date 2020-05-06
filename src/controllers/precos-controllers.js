@@ -67,5 +67,18 @@ module.exports = {
                 console.log(err)
                 res.status(400).send(err);
             })
+    },
+    
+    async getByValor(req, res, next) {
+        const {
+            valor_venda
+        } = req.body
+        RepositorioPreco.getPrecoByValor_venda(valor_venda)
+            .then((data) => {
+                res.status(200).json({data});
+            }).catch((err) => {
+                console.log(err)
+                res.status(400).json({err, message: 'Nenhum dado encontrado!'});
+            })
     }
 };
