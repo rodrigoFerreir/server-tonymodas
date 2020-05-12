@@ -9,6 +9,7 @@ const Cidade = require('../models/Cidade')
 const Cliente= require('../models/Cliente')
 const Contato = require('../models/Contato')
 const Endereco = require('../models/Endereco')
+const Venda = require('../models/Venda')
 
 //Inicando conexão com o banco de dados.
 const connection = new Sequelize(dbConfig);
@@ -30,6 +31,7 @@ Cidade.init(connection);
 Cliente.init(connection);
 Contato.init(connection);
 Endereco.init(connection);
+Venda.init(connection);
 
 
 //Iniciando Relacionamentos
@@ -41,5 +43,6 @@ Cliente.associate(connection.models);
 Cidade.associate(connection.models);
 Endereco.associate(connection.models);
 Contato.associate(connection.models);
+Venda.associate(connection.models);
 
 module.exports = connection;

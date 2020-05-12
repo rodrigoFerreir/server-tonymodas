@@ -15,6 +15,7 @@ class Cliente extends Model{
   static associate(models){
     this.hasMany(models.Contato, {foreignKey: 'id_cliente', as:'contatos'});
     this.hasMany(models.Endereco, {foreignKey: 'id_cliente', as:'enderecos'});
+    this.hasMany(models.Venda, {foreignKey: 'id_cliente', as:'compras'});
   };// um cliente possui muitos enderecos e um cliente possui muitos contatos.
 
 };

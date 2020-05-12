@@ -30,6 +30,8 @@ const clientesRoutes = require('./routes/routes-clientes');
 const contatosRoutes = require('./routes/routes-contatos');
 const enderecosRoutes = require('./routes/routes-enderecos');
 const precosRoutes = require('./routes/routes-precos');
+const vendasRoutes = require('./routes/routes-vendas');
+//
 const postRoutes = require('./routes/routes-arquivos');
 
 //usando as rotas
@@ -42,6 +44,8 @@ app.use('/clientes', clientesRoutes);
 app.use('/contatos', contatosRoutes);
 app.use('/enderecos', enderecosRoutes);
 app.use('/precos', precosRoutes);
+app.use('/vendas', vendasRoutes);
+//
 app.use('/arquivos', postRoutes);
 
 module.exports = app;
