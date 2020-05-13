@@ -2,7 +2,7 @@
 const Venda = require('../models/Venda')
 const Cliente = require('../models/Cliente');
 const Produto = require('../models/Produto');
-const RepositorioPreco = require('../repositories/repo-precos')
+const RepositorioProduto = require('../repositories/repo-produtos')
 
 module.exports = {
     async post(req, res, next) {
@@ -11,12 +11,21 @@ module.exports = {
             id_produto
         } = req.body;
         const produto = await Produto.findByPk(id_produto);
-        const valor_final = Produto.describe()
-        console.log(valor_final)
+        const produtoData = await RepositorioProduto.getProdutoById(id_produto)
+        const cliente = await Cliente.findByPk(id_cliente);
+
+        console.log(produtoData.valor_venda)
 
         if (!produto) {
             res.status(400).json({
                 message: 'Produto não encontrado'
+            })
+            return;
+        }
+        
+        if (!cliente) {
+            res.status(400).json({
+                message: 'Cliente não encontrado'
             })
             return;
         }
@@ -27,21 +36,16 @@ module.exports = {
         }).then((data) => {
             if (data[1] === true) {
                 res.status(200).json({
-                    message: 'Novo Preco criado'
-                })
-            } else {
-                res.status(200).json({
-                    message: 'Preco encontrado',
-                    dados: data[0]
+                    message: 'Nova venda realizada'
                 })
             }
-            produto.addPreco(data[0])
+            produto.addVenda(data[0])
         }).catch((err) => {
             res.status(400).json({
-                message: 'Preco não encontrado nem cadastrado, verifique os dados enviados!'
+                message: 'Venda não foi realizada, verifique os dados enviados!'
             })
         })
-        return res.json(preco);
+        return res.json(venda);
     },
 
     async get(req, res, next) {

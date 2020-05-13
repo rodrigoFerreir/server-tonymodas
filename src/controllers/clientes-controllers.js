@@ -9,7 +9,7 @@ module.exports = {
         let contract = new ValidationContract();
         contract.hasMinLen(req.body.nome, 3, 'O nome deve conter pelo menos 3 caracteres');
         contract.hasMinLen(req.body.cpf, 11, 'O cpf deve conter pelo menos 11 caracteres');
-        contract.hasMinLen(req.body.referencia, 1, 'O título deve conter pelo menos 1 caracteres');
+        contract.hasMinLen(req.body.referencia, 1, 'A referencia deve conter pelo menos 1 caracteres');
 
         // Se os dados forem inválidos
         if (!contract.isValid()) {
