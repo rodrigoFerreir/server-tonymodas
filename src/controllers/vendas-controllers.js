@@ -8,13 +8,12 @@ module.exports = {
     async post(req, res, next) {
         const {
             id_cliente,
-            id_produto
+            id_produto,
+            valor_final
         } = req.body;
         const produto = await Produto.findByPk(id_produto);
         const produtoData = await RepositorioProduto.getProdutoById(id_produto)
         const cliente = await Cliente.findByPk(id_cliente);
-
-        console.log(produtoData.valor_venda)
 
         if (!produto) {
             res.status(400).json({
@@ -34,15 +33,16 @@ module.exports = {
             id_produto,
             valor_final
         }).then((data) => {
-            if (data[1] === true) {
+            if (data === true) {
                 res.status(200).json({
                     message: 'Nova venda realizada'
                 })
             }
-            produto.addVenda(data[0])
+            produto.addVenda(data)
         }).catch((err) => {
             res.status(400).json({
-                message: 'Venda não foi realizada, verifique os dados enviados!'
+                message: 'Venda não foi realizada, verifique os dados enviados!',
+                erro:err
             })
         })
         return res.json(venda);
@@ -60,9 +60,9 @@ module.exports = {
 
     async getById(req, res, next) {
         const {
-            id_preco
+            id_venda
         } = req.body
-        RepositorioPreco.getPrecoById(id_preco)
+        RepositorioVenda.getVendaById(id_venda)
             .then((data) => {
                 res.status(200).send(data);
             }).catch((err) => {
@@ -71,11 +71,11 @@ module.exports = {
             })
     },
     
-    async getByValor(req, res, next) {
+    async getByCliente(req, res, next) {
         const {
-            valor_venda
+            id_cliente
         } = req.body
-        RepositorioPreco.getPrecoByValor_venda(valor_venda)
+        RepositorioVenda.getVendaByCliente(id_cliente)
             .then((data) => {
                 res.status(200).json({data});
             }).catch((err) => {

@@ -91,7 +91,6 @@ module.exports = {
         const {
             nome,
             marca,
-
             valor_compra,
             valor_venda,
             quantidade

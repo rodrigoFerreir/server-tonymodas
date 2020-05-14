@@ -17,6 +17,7 @@ class Produto extends Model{
     this.belongsTo(models.categorias, {foreignKey:'id_categoria', as:'categorias'})
     this.belongsTo(models.Lote, {foreignKey:'id_lote', as:'lotes'});
     this.belongsToMany(models.Preco, {foreignKey:'id_produto', through:'preco_produtos', as:'precos'});
+    this.belongsToMany(models.Venda, {foreignKey:'id_produto', through:'item_vendas', as:'vendas'});
   };
 };
 module.exports = Produto;
