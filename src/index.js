@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors')
 //const mongoose = require('mongoose');
 
 //conectando banco de dados
@@ -19,6 +20,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
+
+//configurando cors
+app.use(cors())
 
 //carregar rotas
 const indexRoutes = require('./routes/routes-index');

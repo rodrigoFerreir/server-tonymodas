@@ -51,7 +51,7 @@ function onListening() {
   debug('Listening on ' + bind);
 };
 
-const port = normalizePort(process.env.PORT || '3000'); //inicando a porta
+const port = normalizePort(process.env.PORT || '8080'); //inicando a porta
 server.listen(port); //iniciando servidor
 server.on('error', onError); //controlando erros
 server.on('listening', onListening); //controlando debug

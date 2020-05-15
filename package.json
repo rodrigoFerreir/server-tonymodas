@@ -8,10 +8,12 @@
     "node": "^12.14.1"
   },
   "scripts": {
-    "start": "nodemon bin/server.js"
+    "start": "node bin/server.js",
+    "dev": "nodemon bin/server.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.9.4",
     "morgan": "^1.9.1",

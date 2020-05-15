@@ -7,7 +7,7 @@ const route = router.get('/', (req, res, next) => {
     res.status(200).json({
         title: 'Hello Word',
         message: 'Aplicação Node.js rodadando.',
-        version: '0.0.2'
+        version: '1.0.2'
     })
 });
 
