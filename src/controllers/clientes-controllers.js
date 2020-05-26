@@ -75,7 +75,7 @@ module.exports = {
             })
     },
 
-    async getByCPF(req, res, next) {
+    async returnIdByCPF(req, res, next) {
         const {
             cpf
         } = req.body
