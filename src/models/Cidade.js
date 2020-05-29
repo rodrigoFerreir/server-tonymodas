@@ -12,7 +12,7 @@ class Cidade extends Model{
   };
 
   static associate(models){
-    this.hasMany(models.Endereco, {foreignKey: 'id_cidade', as:'enderecos'});
+    this.hasMany(models.Endereco, {foreignKey: 'nome_cidade', as:'enderecos'});
   };
 };
 module.exports = Cidade;

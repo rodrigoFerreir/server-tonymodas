@@ -17,12 +17,12 @@ module.exports = {
           type: Sequelize.DATE,
           allowNull: false,
         },
-        id_cliente:{
-          type: Sequelize.INTEGER,
-          references:{ model:'clientes', key:'id' },
+        cpf_cliente:{
+          type: Sequelize.TEXT,
+          references:{ model:'clientes', key:'cpf' },
           onUpdate:'cascade',
           onDelete:'cascade',
-          allowNull: true,
+          allowNull: false,
         },
         valor_final:{
           type: Sequelize.STRING,

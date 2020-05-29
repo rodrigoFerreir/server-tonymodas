@@ -24,6 +24,7 @@ module.exports = {
       cpf:{
         type: Sequelize.TEXT,
         allowNull: false,
+        unique: true,
       },
       referencia:{
         type: Sequelize.STRING,

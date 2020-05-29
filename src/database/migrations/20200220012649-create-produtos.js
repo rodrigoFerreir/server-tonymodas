@@ -38,12 +38,13 @@ module.exports = {
         allowNull: false,
         defaultValue: '1',
       },
-      id_lote:{
+      referencia_lote:{
         type: Sequelize.INTEGER,
-        references:{ model:'lotes', key:'id' },
+        references:{ model:'lotes', key:'referencia' },
         onUpdate:'cascade',
         onDelete:'restrict',
         allowNull: false,
+        unique: true,
       },
     });
   },

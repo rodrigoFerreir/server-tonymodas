@@ -12,7 +12,7 @@ class Contato extends Model{
   };
 
   static associate(models){
-    this.belongsTo(models.Cliente, {foreignKey: 'id_cliente', as: "contato"});
+    this.belongsTo(models.Cliente, {foreignKey: 'cpf_cliente', as: "contato"});
   };
 };
 

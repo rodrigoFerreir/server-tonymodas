@@ -12,7 +12,7 @@ class Venda extends Model{
 
   static associate(models){
     this.belongsToMany(models.Produto, { foreignKey:'id_venda', through:'item_vendas', as:'produtos'});
-    this.belongsTo(models.Cliente, {foreignKey:'id_cliente', as:'clientes'})
+    this.belongsTo(models.Cliente, {foreignKey:'cpf', as:'clientes'})
   };
 };
 module.exports = Venda;

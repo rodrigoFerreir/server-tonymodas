@@ -39,6 +39,59 @@ module.exports = {
         return res.json(cliente);
     },
 
+    async postCliente(req, res, next) {
+        let contract = new ValidationContract();
+        contract.hasMinLen(req.body.nome, 3, 'O nome deve conter pelo menos 3 caracteres');
+        contract.hasMinLen(req.body.cpf, 11, 'O cpf deve conter pelo menos 11 caracteres');
+        contract.hasMinLen(req.body.referencia, 1, 'A referencia deve conter pelo menos 1 caracteres');
+
+        // Se os dados forem inválidos
+        if (!contract.isValid()) {
+            res.status(400).send(contract.errors()).end();
+            return;
+        }
+        const {
+            nome,
+            referencia,
+            cpf,
+            logradouro,
+            numero,
+            bairro,
+            complemento,
+            telefone,
+            email,
+            nome_cidade,
+            cep,
+            uf
+        } = req.body;
+        const cliente = await RepositorioCliente.postClienteData({
+                nome,
+                referencia,
+                cpf,
+                logradouro,
+                numero,
+                bairro,
+                complemento,
+                telefone,
+                email,
+                nome_cidade,
+                cep,
+                uf,
+            })
+            .then(() => {
+                res.status(201).send({
+                    message: 'Cliente cadastrado com sucesso.'
+                });
+            }).catch((err) => {
+                res.status(400).send({
+                    message: 'Cliente não cadastrado.',
+                    data: err
+                });
+            });
+        return res.json(cliente);
+    },
+
+
     async getAll(req, res, next) {
         Cliente.findAll()
             .then((data) => {

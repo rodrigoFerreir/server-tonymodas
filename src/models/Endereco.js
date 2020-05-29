@@ -14,8 +14,8 @@ class Endereco extends Model{
   };
 
   static associate(models){
-    this.belongsTo(models.Cidade, {foreignKey: 'id_cidade', as: "cidades"});
-    this.belongsTo(models.Cliente, {foreignKey: 'id_cliente', as: "enderecos"});
+    this.belongsTo(models.Cidade, {foreignKey: 'nome', as: "cidades"});
+    this.belongsTo(models.Cliente, {foreignKey: 'cpf_cliente', as: "enderecos"});
 
   }; //produtos pertence a uma categoria e a muitos lotes
 

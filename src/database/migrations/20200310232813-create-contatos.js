@@ -25,14 +25,11 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      id_cliente: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'clientes',
-          key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade',
+      cpf_cliente:{
+        type: Sequelize.TEXT,
+        references:{ model:'clientes', key:'cpf' },
+        onUpdate:'cascade',
+        onDelete:'cascade',
         allowNull: false,
       },
     });

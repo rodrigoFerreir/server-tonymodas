@@ -3,7 +3,7 @@ module.exports = {
   host: 'localhost',
   username: 'postgres',
   password: 'admin',
-  database: 'tonymodas_estoque',
+  database: 'sistema_vendas',
   define: {
     timestamps: true,
     underscored : true,

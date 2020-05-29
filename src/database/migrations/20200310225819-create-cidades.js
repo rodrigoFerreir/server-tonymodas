@@ -20,8 +20,14 @@ module.exports = {
       nome:{
         type: Sequelize.TEXT,
         allowNull: false,
+        unique: true,
       },
       cep:{
+        type: Sequelize.TEXT,
+        allowNull: false,
+        
+      },
+      UF:{
         type: Sequelize.TEXT,
         allowNull: false,
       },
